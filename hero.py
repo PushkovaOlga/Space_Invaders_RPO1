@@ -1,9 +1,9 @@
 import pygame
+import sys
 
 
 class Hero():
     def __init__(self, screen):
-        '''инициалиция главного героя - космического корабля'''
         self.image = pygame.image.load("images/hero.png")
         self.rect = self.image.get_rect()
         self.screen = screen
