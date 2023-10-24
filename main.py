@@ -17,6 +17,15 @@ def start_game():
       if event.type==pygame.QUIT:
         flag=False
         sys.exit()
+      elif event.type == pygame.KEYDOWN:
+          if event.key == pygame.K_LEFT:
+                hero.rect.x -= 5   # сдвигаем героя влево
+          elif event.key == pygame.K_RIGHT:
+                hero.rect.x += 5   # сдвигаем героя вправо
+          elif event.key == pygame.K_UP:
+                hero.rect.y -= 5   # сдвигаем героя вверх
+          elif event.key == pygame.K_DOWN:
+                hero.rect.y += 5   # сдвигаем героя вниз
     
     pygame.display.flip()
     screen.fill(bg)
