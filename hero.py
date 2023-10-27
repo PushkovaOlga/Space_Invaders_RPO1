@@ -4,7 +4,7 @@ import sys
 
 class Hero():
     def __init__(self, screen):
-        self.image = pygame.image.load("images/hero.png")
+        self.image = pygame.image.load("'''need to fix with codium'''")
         self.rect = self.image.get_rect()
         self.screen = screen
         self.screen_rect = screen.get_rect()
