@@ -6,9 +6,8 @@ def start_game():
     '''основная функция для описания игры'''
     pygame.init()
     screen = pygame.display.set_mode((600, 900))
-    pygame.display.set_caption("Самая лучшая игра")
-
-    #объекты классов
+    pygame.display.set_caption("Space Invaders")
+
     hero = Hero(screen)
 
     flag = True
