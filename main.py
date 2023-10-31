@@ -7,7 +7,8 @@ def start_game():
     pygame.init()
     screen = pygame.display.set_mode((600, 900))
     pygame.display.set_caption("Space Invaders")
-
+
+
     hero = Hero(screen)
 
     flag = True
