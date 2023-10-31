@@ -36,4 +36,5 @@ def start_game():
 
         pygame.display.flip()
         clock.tick(FPS)
+        
 start_game()
