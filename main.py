@@ -1,6 +1,9 @@
 import pygame
 import sys
 from hero import Hero
+from enemy import Enemy
+import random
+
 
 class Bullet(pygame.sprite.Sprite):
     def __init__(self, x, y):
@@ -13,16 +16,20 @@ class Bullet(pygame.sprite.Sprite):
     def update(self):
         self.rect.y -= self.speed
 
+    
 def start_game():
     pygame.init()
     screen = pygame.display.set_mode((800, 600))
     pygame.display.set_caption("Самая лучшая игра")
-    bg = (255, 255, 255)
+    
+    background = pygame.image.load("images/background.jpg")
     
     hero = Hero(screen)
     bullets=[]
     
     clock = pygame.time.Clock()
+    spawn_interval = 1000  # Интервал в миллисекундах между спавном врагов
+    last_spawn_time = 0
     flag = True
 
     acceleration = 0.2
@@ -30,15 +37,33 @@ def start_game():
     max_speed = 5
     speed_x = 0
     speed_y = 0
+    
+    #ENEMY
+    max_enemies = 10
+    ENEMY_WIDTH = 50
+    ENEMY_HEIGHT = 50
+    SCREEN_WIDTH = 800
+    enemies = pygame.sprite.Group()
 
+    def spawn_enemy():
+        num_enemies = random.randint(1, 5)  # Случайное количество врагов от 1 до 5
+        for _ in range(num_enemies):
+            x = random.randint(0, SCREEN_WIDTH - ENEMY_WIDTH)
+            y = random.randint(-ENEMY_HEIGHT, 0)
+            enemy = Enemy(x, y)
+            enemies.add(enemy)
+        enemies.draw(screen)
+    
+    
     while flag:
+        screen.blit(background, (0, 0))
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 flag = False
                 sys.exit()
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
-                    bullet = Bullet(hero.rect.centerx, hero.rect.top)
+                    bullet = Bullet(h.++ero.rect.centerx, hero.rect.top)
                     bullets.append(bullet)
 
         keys = pygame.key.get_pressed()
@@ -76,6 +101,7 @@ def start_game():
             bullet.update()
             if bullet.rect.bottom < 0:
                 bullets.remove(bullet)
+                
         
         # Проверяем границы экрана
         if hero.rect.left < 0:
@@ -86,14 +112,25 @@ def start_game():
             hero.rect.top = 0
         if hero.rect.bottom > screen.get_height():
             hero.rect.bottom = screen.get_height()
-            
-        pygame.display.flip()
-        screen.fill(bg)
-        hero.output_hero()
         
         for bullet in bullets:
             screen.blit(bullet.image, bullet.rect)
+        
+        
+        current_time = pygame.time.get_ticks()
 
+        if current_time - last_spawn_time > spawn_interval:
+            spawn_enemy()
+            last_spawn_time = current_time
+
+        for enemy in enemies:
+            enemy.update()
+            screen.blit(enemy.image, enemy.rect)
+
+        hero.output_hero()
+
+        
+        pygame.display.flip()
         clock.tick(60)
 
 start_game()
