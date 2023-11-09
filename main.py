@@ -63,7 +63,7 @@ def start_game():
                 sys.exit()
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
-                    bullet = Bullet(h.++ero.rect.centerx, hero.rect.top)
+                    bullet = Bullet(hero.rect.centerx, hero.rect.top)
                     bullets.append(bullet)
 
         keys = pygame.key.get_pressed()
