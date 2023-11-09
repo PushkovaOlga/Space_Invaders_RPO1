@@ -20,7 +20,7 @@ class Bullet(pygame.sprite.Sprite):
 def start_game():
     pygame.init()
     screen = pygame.display.set_mode((800, 600))
-    pygame.display.set_caption("Самая лучшая игра")
+    pygame.display.set_caption("Space Invaders")
     
     background = pygame.image.load("images/background.jpg")
     
@@ -71,10 +71,6 @@ def start_game():
             speed_x -= acceleration
         if keys[pygame.K_d] or keys[pygame.K_RIGHT]:
             speed_x += acceleration
-        if keys[pygame.K_w] or keys[pygame.K_UP]:
-            speed_y -= acceleration
-        if keys[pygame.K_s] or keys[pygame.K_DOWN]:
-            speed_y += acceleration
         
         # Применяем замедление при отпускании клавиш
         if not keys[pygame.K_a] and not keys[pygame.K_LEFT]:
@@ -83,12 +79,6 @@ def start_game():
         if not keys[pygame.K_d] and not keys[pygame.K_RIGHT]:
             if speed_x > 0:
                 speed_x -= deceleration
-        if not keys[pygame.K_w] and not keys[pygame.K_UP]:
-            if speed_y < 0:
-                speed_y += deceleration
-        if not keys[pygame.K_s] and not keys[pygame.K_DOWN]:
-            if speed_y > 0:
-                speed_y -= deceleration
         
         # Ограничиваем скорость
         speed_x = max(-max_speed, min(max_speed, speed_x))
