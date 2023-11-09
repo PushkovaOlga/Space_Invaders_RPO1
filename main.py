@@ -8,7 +8,7 @@ import random
 class Bullet(pygame.sprite.Sprite):
     def __init__(self, x, y):
         super().__init__()
-        self.image = pygame.image.load("images/bullet.png")
+        self.image = pygame.image.load("Space_Invaders_RPO1_Chibotar/images/bullet.png")
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
         self.speed = 5
@@ -22,13 +22,13 @@ def start_game():
     screen = pygame.display.set_mode((800, 600))
     pygame.display.set_caption("Space Invaders")
     
-    background = pygame.image.load("images/background.jpg")
+    background = pygame.image.load("Space_Invaders_RPO1_Chibotar/images/background.jpg")
     
     hero = Hero(screen)
     bullets=[]
     
     clock = pygame.time.Clock()
-    spawn_interval = 1000  # Интервал в миллисекундах между спавном врагов
+    spawn_interval = 2000  # Интервал в миллисекундах между спавном врагов
     last_spawn_time = 0
     flag = True
 
@@ -39,7 +39,7 @@ def start_game():
     speed_y = 0
     
     #ENEMY
-    max_enemies = 10
+    max_enemies = 7
     ENEMY_WIDTH = 50
     ENEMY_HEIGHT = 50
     SCREEN_WIDTH = 800
