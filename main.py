@@ -43,17 +43,21 @@ def start_game():
     ENEMY_WIDTH = 50
     ENEMY_HEIGHT = 50
     SCREEN_WIDTH = 800
+    ENEMY_SPACING = 100
     enemies = pygame.sprite.Group()
 
     def spawn_enemy():
-        num_enemies = random.randint(1, 5)  # Случайное количество врагов от 1 до 5
-        for _ in range(num_enemies):
-            x = random.randint(0, SCREEN_WIDTH - ENEMY_WIDTH)
+        num_enemies = 5  # Заданное количество врагов
+        total_width = num_enemies * (ENEMY_WIDTH + ENEMY_SPACING) - ENEMY_SPACING
+        start_x = (SCREEN_WIDTH - total_width) // 2  # Центрирование врагов по горизонтали
+
+        for i in range(num_enemies):
+            x = start_x + i * (ENEMY_WIDTH + ENEMY_SPACING)
             y = random.randint(-ENEMY_HEIGHT, 0)
             enemy = Enemy(x, y)
             enemies.add(enemy)
+
         enemies.draw(screen)
-    
     
     while flag:
         screen.blit(background, (0, 0))
